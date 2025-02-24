@@ -1,0 +1,111 @@
+.history-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: var(--border-radius);
+    background-color: var(--surface-light);
+    padding: 0.5rem;
+  }
+  
+  .history-item {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--surface);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    border-left: 3px solid var(--primary-color);
+    transition: var(--transition);
+  }
+  
+  .history-item:hover {
+    transform: translateX(2px);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .history-timestamp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  
+  .history-room {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .history-response {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin: 0 0.25rem;
+  }
+  
+  .response-yes {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+  
+  .response-no {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+  
+  .history-reason {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  .common-reasons {
+    background-color: var(--surface-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  
+  .close-button {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    border: none;
+  }
+  
+  .close-button:hover {
+    background-color: var(--secondary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .close-button:active {
+    transform: translateY(1px);
+  }
+  
+  .Modal h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .Modal h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+  } 

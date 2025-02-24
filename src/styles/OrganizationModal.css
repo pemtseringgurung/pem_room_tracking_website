@@ -1,0 +1,126 @@
+.Modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    outline: none;
+    animation: modalFadeIn 0.3s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .Modal h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .Modal h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .Modal input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--surface-light);
+    border-radius: var(--border-radius);
+    background-color: var(--surface-light);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  .Modal input:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+  }
+  
+  .Modal button {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    color: white;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    flex: 1;
+  }
+  
+  .yes-button {
+    background-color: var(--success);
+  }
+  
+  .yes-button:hover {
+    background-color: #0d9669;
+  }
+  
+  .no-button {
+    background-color: var(--error);
+  }
+  
+  .no-button:hover {
+    background-color: #dc2626;
+  }
+  
+  .save-button {
+    background-color: var(--primary-color);
+  }
+  
+  .save-button:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--surface-overlay);
+    backdrop-filter: blur(4px);
+    animation: overlayFadeIn 0.3s ease-out;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  } 

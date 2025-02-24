@@ -1,0 +1,66 @@
+.notification-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .start-button {
+    display: block;
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.8s ease-out;
+    border: none;
+  }
+  
+  .start-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .start-button:active {
+    transform: translateY(1px);
+  }
+  
+  .history-button {
+    display: block;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    animation: slideIn 0.9s ease-out;
+    border: none;
+  }
+  
+  .history-button:hover {
+    background-color: var(--secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-button:active {
+    transform: translateY(1px);
+  }
+  
+  .start-button.pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  .notification-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  } 

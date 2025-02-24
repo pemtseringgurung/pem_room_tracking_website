@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Modal from 'react-modal';
 import './App.css';
+import Header from './components/Header';
+import RoomForm from './components/RoomForm';
+import RoomList from './components/RoomList';
+import NotificationSettings from './components/NotificationSettings';
+import OrganizationModal from './components/OrganizationModal';
+import HistoryModal from './components/HistoryModal';
+import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
@@ -127,95 +133,62 @@ function App() {
     setHistoryModalIsOpen(false);
   };
 
+  const handleViewHistory = () => {
+    setHistoryModalIsOpen(true);
+  };
+
   return (
     <div className="App">
-      <h1>Pem's App</h1>
-      <button className="refresh-button" onClick={handleRefresh}>Refresh</button>
-      <div className="input-group">
-        <label>
-          Number of Rooms: 
-          <input
-            type="number"
-            min="1"
-            value={roomCount}
-            onChange={handleRoomCountChange}
+      <Header title="Pem's App" onRefresh={handleRefresh} />
+      
+      <div className="app-content">
+        <div className="dashboard-section gradient-border">
+          <div className="section-title">Room Configuration</div>
+          <RoomForm roomCount={roomCount} onRoomCountChange={handleRoomCountChange} />
+        </div>
+        
+        <div className="dashboard-section gradient-border">
+          <div className="section-title">Notification Frequency</div>
+          <NotificationSettings
+            notificationFrequency={notificationFrequency}
+            onNotificationFrequencyChange={handleNotificationFrequencyChange}
+            notificationsStarted={notificationsStarted}
+            onStartNotifications={() => setNotificationsStarted(true)}
+            onViewHistory={handleViewHistory}
           />
-        </label>
-      </div>
-      <div className="rooms">
-        {Array.from({ length: roomCount }).map((_, index) => (
-          <div key={index} className="room">
-            <input
-              type="text"
-              placeholder={`Room ${index + 1} Name`}
-              value={roomNames[index]}
-              onChange={(e) => handleRoomNameChange(index, e.target.value)}
-            />
-            <button onClick={() => handleRoomStatusClick(index)} disabled={!notificationsStarted}>Update Status</button>
-            <span> ({clickCounts[index] || 0}/{notificationFrequency} updates today)</span>
-          </div>
-        ))}
-      </div>
-      <div className="input-group">
-        <label>
-          Notifications per Day: 
-          <input
-            type="number"
-            min="1"
-            value={notificationFrequency}
-            onChange={handleNotificationFrequencyChange}
-            disabled={notificationsStarted}
+        </div>
+        
+        <div className="dashboard-section full-width gradient-border">
+          <div className="section-title">Room Status</div>
+          <RoomList
+            roomCount={roomCount}
+            roomNames={roomNames}
+            onRoomNameChange={handleRoomNameChange}
+            onRoomStatusClick={handleRoomStatusClick}
+            notificationsStarted={notificationsStarted}
+            clickCounts={clickCounts}
+            notificationFrequency={notificationFrequency}
           />
-        </label>
+        </div>
       </div>
-      {!notificationsStarted && (
-        <button className="start-button" onClick={() => setNotificationsStarted(true)}>Start Notifications</button>
-      )}
-      <button className="history-button" onClick={() => setHistoryModalIsOpen(true)}>View History</button>
-      <Modal
+      
+      <OrganizationModal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
-        contentLabel="Room Organization Check"
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        {!isAskingReason ? (
-          <>
-            <h2>Is your room "{roomNames[currentRoom]}" still organized?</h2>
-            <button onClick={() => handleModalResponse('Yes')}>Yes</button>
-            <button onClick={() => handleModalResponse('No')}>No</button>
-          </>
-        ) : (
-          <>
-            <h2>Why is your room "{roomNames[currentRoom]}" not organized?</h2>
-            <input
-              type="text"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-            />
-            <button onClick={handleSaveReason}>Save</button>
-          </>
-        )}
-      </Modal>
-      <Modal
+        isAskingReason={isAskingReason}
+        roomName={currentRoom !== null ? roomNames[currentRoom] : ''}
+        reason={reason}
+        onReasonChange={(e) => setReason(e.target.value)}
+        onModalResponse={handleModalResponse}
+        onSaveReason={handleSaveReason}
+      />
+      
+      <HistoryModal
         isOpen={historyModalIsOpen}
         onRequestClose={() => setHistoryModalIsOpen(false)}
-        contentLabel="History"
-        className="Modal"
-        overlayClassName="Overlay"
-      >
-        <h2>History</h2>
-        <ul>
-          {history.map((entry, index) => (
-            <li key={index}>
-              {entry.timestamp} - {entry.room}: {entry.response} {entry.reason && `- Reason: ${entry.reason}`}
-            </li>
-          ))}
-        </ul>
-        <h2>Common Reasons</h2>
-        <p>{getCommonReasons()}</p>
-        <button onClick={() => setHistoryModalIsOpen(false)}>Close</button>
-      </Modal>
+        history={history}
+        commonReasons={getCommonReasons()}
+      />
     </div>
   );
 }
